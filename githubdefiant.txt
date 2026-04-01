@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Defiant Frameworks Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1a2535;
+      --navy-dark: #0f1820;
+      --crimson: #8b1a1a;
+      --crimson-bright: #a82020;
+      --cream: #e8dfc8;
+      --cream-dim: #c9be9e;
+      --off-white: #f5f0e8;
+      --border: rgba(232, 223, 200, 0.18);
+    }
+
+```
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--navy-dark);
+  color: var(--cream);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── HEADER ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(15, 24, 32, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.header-logo img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.header-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.header-wordmark .top {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.12em;
+  color: var(--cream);
+}
+
+.header-wordmark .sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  color: var(--cream-dim);
+  text-transform: uppercase;
+}
+
+nav {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+
+nav a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+nav a:hover { color: var(--cream); }
+
+.nav-cta {
+  padding: 8px 22px;
+  border: 1px solid var(--crimson-bright);
+  color: var(--cream) !important;
+  background: transparent;
+  transition: background 0.2s, color 0.2s !important;
+}
+
+.nav-cta:hover {
+  background: var(--crimson-bright) !important;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 0 48px;
+  gap: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 70% 50%, rgba(139,26,26,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(26,37,53,0.6) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Large ghost letter */
+.hero-ghost {
+  position: absolute;
+  right: -2%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(280px, 32vw, 500px);
+  line-height: 1;
+  color: rgba(232, 223, 200, 0.025);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.04em;
+}
+
+.hero-left {
+  position: relative;
+  z-index: 1;
+  padding-top: 80px;
+}
+
+.hero-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--crimson-bright);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--crimson-bright);
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 7vw, 96px);
+  line-height: 0.95;
+  letter-spacing: 0.03em;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+
+.hero-title span {
+  color: var(--crimson-bright);
+}
+
+.hero-subtitle {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(18px, 2.4vw, 28px);
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  margin-bottom: 36px;
+}
+
+.hero-desc {
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(232, 223, 200, 0.7);
+  max-width: 460px;
+  margin-bottom: 48px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  background: var(--crimson);
+  color: var(--cream);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s, transform 0.15s;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.btn-primary:hover {
+  background: var(--crimson-bright);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  background: transparent;
+  color: var(--cream-dim);
+  border: 1px solid rgba(232, 223, 200, 0.3);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.btn-secondary:hover {
+  color: var(--cream);
+  border-color: var(--cream-dim);
+}
+
+/* Hero right — logo display */
+.hero-right {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;
+}
+
+.logo-display {
+  position: relative;
+  width: clamp(280px, 32vw, 420px);
+  height: clamp(280px, 32vw, 420px);
+}
+
+.logo-display img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: floatLogo 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 60px rgba(139,26,26,0.3));
+}
+
+.logo-ring {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 223, 200, 0.08);
+  animation: spinRing 30s linear infinite;
+}
+
+.logo-ring::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--crimson-bright);
+}
+
+@keyframes floatLogo {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes spinRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ── DIVIDER ── */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 48px;
+  margin: 20px 0;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.divider-mark {
+  width: 8px;
+  height: 8px;
+  background: var(--crimson);
+  transform: rotate(45deg);
+}
+
+/* ── STATS BAND ── */
+.stats-band {
+  background: rgba(139,26,26,0.12);
+  border-top: 1px solid rgba(139,26,26,0.3);
+  border-bottom: 1px solid rgba(139,26,26,0.3);
+  padding: 32px 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stat-item {
+  text-align: center;
+  padding: 0 24px;
+  border-right: 1px solid var(--border);
+}
+
+.stat-item:last-child { border-right: none; }
+
+.stat-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px;
+  letter-spacing: 0.04em;
+  color: var(--cream);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-value span { color: var(--crimson-bright); }
+
+.stat-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+
+/* ── SECTION ── */
+section {
+  padding: 100px 48px;
+}
+
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--crimson-bright);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-label::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--crimson-bright);
+}
+
+.section-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 5vw, 64px);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--cream);
+  margin-bottom: 24px;
+}
+
+.section-heading em {
+  font-style: normal;
+  color: var(--crimson-bright);
+}
+
+/* ── ABOUT ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-body p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: rgba(232, 223, 200, 0.72);
+  margin-bottom: 20px;
+}
+
+.about-body p strong {
+  color: var(--cream);
+  font-weight: 400;
+}
+
+.about-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.principle {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 20px;
+  align-items: start;
+  transition: background 0.2s;
+}
+
+.principle:first-child { border-top: 1px solid var(--border); }
+
+.principle-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: rgba(139,26,26,0.5);
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.principle-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+
+.principle-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(232, 223, 200, 0.6);
+}
+
+/* ── PRODUCTS ── */
+.products-section {
+  background: rgba(26, 37, 53, 0.5);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 60px;
+}
+
+.product-card {
+  background: rgba(15, 24, 32, 0.6);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.product-card:hover {
+  background: rgba(15, 24, 32, 0.9);
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--crimson);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover::before {
+  transform: scaleX(1);
+}
+
+.product-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--crimson-bright);
+  margin-bottom: 16px;
+}
+
+.product-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.06em;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+
+.product-tagline {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  margin-bottom: 20px;
+}
+
+.product-desc {
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(232, 223, 200, 0.6);
+}
+
+.product-status {
+  display: inline-block;
+  margin-top: 24px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border: 1px solid rgba(139,26,26,0.5);
+  color: rgba(139,26,26,0.9);
+}
+
+.product-status.active {
+  border-color: rgba(80, 160, 80, 0.5);
+  color: rgba(100, 185, 100, 0.9);
+}
+
+/* ── CONTACT ── */
+.contact-section {
+  text-align: center;
+  padding: 100px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 100% at 50% 50%, rgba(139,26,26,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.contact-section .section-label {
+  justify-content: center;
+}
+
+.contact-section .section-label::before { display: none; }
+
+.contact-body {
+  max-width: 580px;
+  margin: 0 auto 48px;
+  font-size: 16px;
+  line-height: 1.85;
+  color: rgba(232, 223, 200, 0.65);
+}
+
+.contact-email {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(22px, 3vw, 34px);
+  letter-spacing: 0.08em;
+  color: var(--cream);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--crimson);
+  padding-bottom: 4px;
+  transition: color 0.2s;
+}
+
+.contact-email:hover { color: var(--crimson-bright); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-left {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(232, 223, 200, 0.35);
+}
+
+.footer-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-mark img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  opacity: 0.5;
+}
+
+.footer-mark span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  color: rgba(232, 223, 200, 0.35);
+}
+
+/* ── ANIMATIONS ── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.fade-in:nth-child(1) { animation-delay: 0.1s; }
+.fade-in:nth-child(2) { animation-delay: 0.25s; }
+.fade-in:nth-child(3) { animation-delay: 0.4s; }
+.fade-in:nth-child(4) { animation-delay: 0.55s; }
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  header { padding: 16px 24px; }
+  nav { display: none; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 100px 24px 60px;
+    text-align: center;
+  }
+  .hero-left { padding-top: 0; }
+  .hero-eyebrow { justify-content: center; }
+  .hero-eyebrow::before { display: none; }
+  .hero-desc { margin: 0 auto 36px; }
+  .hero-actions { justify-content: center; }
+  .hero-right { padding-top: 0; }
+  .hero-ghost { display: none; }
+
+  .stats-band { grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 32px 24px; }
+  .stat-item { border-right: none; }
+
+  section { padding: 60px 24px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .products-grid { grid-template-columns: 1fr; }
+
+  footer { flex-direction: column; gap: 16px; text-align: center; }
+}
+```
+
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+
+  <header>
+    <a href="#" class="header-logo">
+      <img src="BE4494F2-EA6E-4A53-84B9-04330CF842B7.png" alt="Defiant Frameworks Labs logo" onerror="this.style.display='none'">
+      <div class="header-wordmark">
+        <span class="top">Defiant Frameworks</span>
+        <span class="sub">Labs &nbsp;·&nbsp; defiantframeworks.org</span>
+      </div>
+    </a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+
+  <div class="hero">
+    <div class="hero-ghost">D</div>
+
+```
+<div class="hero-left">
+  <div class="hero-eyebrow fade-in">Independent Research Lab</div>
+  <h1 class="hero-title fade-in">
+    Defiant<br>
+    <span>Frame</span>works<br>
+    Labs
+  </h1>
+  <p class="hero-subtitle fade-in">Where systems meet human behavior</p>
+  <p class="hero-desc fade-in">
+    Building rigorous frameworks for understanding and modeling human regulatory state — translating physics-grade thinking into tools that work in the real world.
+  </p>
+  <div class="hero-actions fade-in">
+    <a href="#work" class="btn-primary">Our Work</a>
+    <a href="#about" class="btn-secondary">Learn More</a>
+  </div>
+</div>
+
+<div class="hero-right">
+  <div class="logo-display">
+    <div class="logo-ring"></div>
+    <img src="BE4494F2-EA6E-4A53-84B9-04330CF842B7.png" alt="Defiant Frameworks Labs" onerror="this.style.display='none'">
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- STATS BAND -->
+
+  <div class="stats-band">
+    <div class="stat-item">
+      <div class="stat-value">380<span>+</span></div>
+      <div class="stat-label">Modeled Traits</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">78</div>
+      <div class="stat-label">Passing System Tests</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">6</div>
+      <div class="stat-label">Core Architecture Layers</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">8<span>mo</span></div>
+      <div class="stat-label">In Active Development</div>
+    </div>
+  </div>
+
+  <div class="section-divider"><div class="divider-mark"></div></div>
+
+  <!-- ABOUT -->
+
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-body">
+        <div class="section-label">About the Lab</div>
+        <h2 class="section-heading">Human regulation<br>is <em>measurable.</em></h2>
+        <p>
+          Defiant Frameworks Labs is an independent research and technology lab developing the first formal physics-based framework for modeling human regulatory state — treating behavior not as mystery, but as <strong>a deterministic, measurable system</strong>.
+        </p>
+        <p>
+          Founded in Bend, Oregon. Built without institutional gatekeeping. Driven by the conviction that the tools people actually need have to be built by people who actually understand the problem from the inside.
+        </p>
+        <p>
+          Our work spans theoretical framework development, applied AI architecture, and direct deployment into real-world clinical and operational environments.
+        </p>
+      </div>
+      <div class="about-right">
+        <div class="principle">
+          <div class="principle-num">01</div>
+          <div>
+            <div class="principle-title">Physics-grade rigor</div>
+            <div class="principle-desc">Human regulatory state obeys predictable laws. We model them formally — not metaphorically.</div>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">02</div>
+          <div>
+            <div class="principle-title">Systems-first thinking</div>
+            <div class="principle-desc">Behavior emerges from load, bandwidth, debt, and threshold dynamics. We track all of it.</div>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">03</div>
+          <div>
+            <div class="principle-title">Non-pathologizing language</div>
+            <div class="principle-desc">Physics terms, not diagnostic labels. The framework belongs to the person, not the institution.</div>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">04</div>
+          <div>
+            <div class="principle-title">Deployed in the real world</div>
+            <div class="principle-desc">From hospital operations to individual co-regulation — frameworks that survive contact with reality.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+
+  <section id="work" class="products-section">
+    <div class="section-label">Active Projects</div>
+    <h2 class="section-heading">What we're<br><em>building.</em></h2>
+
+```
+<div class="products-grid">
+  <div class="product-card">
+    <div class="product-tag">Core Framework</div>
+    <div class="product-name">PRISM</div>
+    <div class="product-tagline">Predictive Regulatory &amp; Integrity State Model</div>
+    <p class="product-desc">
+      A deterministic kernel modeling human regulatory state across 380+ traits, seven computational layers, and a formal six-machine architecture. The theoretical backbone of everything we build.
+    </p>
+    <span class="product-status active">Active Development</span>
+  </div>
+  <div class="product-card">
+    <div class="product-tag">Applied AI</div>
+    <div class="product-name">Tori</div>
+    <div class="product-tagline">Conversational AI Co-Regulator</div>
+    <p class="product-desc">
+      A PRISM-native AI built specifically for neurodivergent users. Tori reads regulatory state in real time and responds from inside the user's attractor state — not from outside it.
+    </p>
+    <span class="product-status">In Architecture</span>
+  </div>
+  <div class="product-card">
+    <div class="product-tag">Institutional</div>
+    <div class="product-name">Ops<br>Models</div>
+    <div class="product-tagline">Workforce Stability &amp; Load Analysis</div>
+    <p class="product-desc">
+      PRISM-derived models applied to institutional workforce dynamics — identifying tipping points, quantifying strain, and designing minimal recovery interventions for hospitals and operations teams.
+    </p>
+    <span class="product-status">Pilot Phase</span>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- CONTACT -->
+
+  <section id="contact" class="contact-section">
+    <div class="contact-bg"></div>
+    <div class="section-label">Get in Touch</div>
+    <h2 class="section-heading">Work with<br><em>the lab.</em></h2>
+    <p class="contact-body">
+      We're in active development and selectively engaging with clinical partners, researchers, and institutional collaborators who want early access to the framework. If you're building something in the same direction — reach out.
+    </p>
+    <a href="mailto:hello@defiantframeworks.org" class="contact-email">hello@defiantframeworks.org</a>
+    <br>
+    <a href="mailto:hello@defiantframeworks.org" class="btn-primary">Start a Conversation</a>
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <div class="footer-left">&copy; 2026 Defiant Frameworks Labs &nbsp;·&nbsp; Bend, Oregon &nbsp;·&nbsp; defiantframeworks.org</div>
+    <div class="footer-mark">
+      <img src="BE4494F2-EA6E-4A53-84B9-04330CF842B7.png" alt="">
+      <span>Defiant Frameworks Labs</span>
+    </div>
+  </footer>
+
+</body>
+</html>
