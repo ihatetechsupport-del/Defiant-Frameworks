@@ -30,39 +30,16 @@ body{
 .wrap{max-width:560px;margin:0 auto;padding:0 24px}
 
 
-/* ── HERO PLATE ──────────────────────────────────────────
-SCHEMATIC STAND-IN so you can judge the page.
-Replace the whole <div class="plate">…</div> with:
-<img class="plate" src="hero.jpg" alt="DEFIANT FRAMEWORKS LAB">
-──────────────────────────────────────────────────────── /
+/* HERO PLATE — real image. Must be named hero.jpg in the repo. */
 .plate{
-display:block;width:100%;aspect-ratio:4/5;
+display:block;
+width:100%;
+aspect-ratio:4/5;
+object-fit:cover;
 background:var(–deep);
-position:relative;overflow:hidden;
 margin:0 auto;
 }
-.bars{position:absolute;top:44%;left:6%;right:16%;display:flex;gap:1.6%;transform:translateY(-50%)}
-.bars span{
-flex:1;aspect-ratio:.42;background:#dcd9d1;
-display:flex;align-items:center;justify-content:center;
-font-family:Oswald,sans-serif;font-weight:700;
-font-size:clamp(20px,5.4vw,42px);color:#1c1f20;
-}
-.sublabel{
-position:absolute;top:58%;left:0;right:14%;text-align:center;
-font-family:Oswald,sans-serif;font-weight:500;color:#cfccc4;
-font-size:clamp(9px,2.2vw,15px);letter-spacing:.22em;
-}
-.sublabel::after{content:””;display:block;height:2px;background:#cfccc4;width:52%;margin:6px auto 0;opacity:.85}
-.cruiser{position:absolute;bottom:8%;right:11%;width:15%;aspect-ratio:.44;background:#111;border-radius:5px}
-.cruiser::before{content:””;position:absolute;top:22%;left:12%;right:12%;height:7%;background:linear-gradient(90deg,var(–red) 0 50%,#2f5fa8 50% 100%);border-radius:1px}
-.cruiser::after{content:“LLC”;position:absolute;top:34%;left:0;right:0;bottom:14%;background:#ecebe6;color:#15181a;font-family:Oswald,sans-serif;font-weight:700;font-size:clamp(8px,1.6vw,13px);display:flex;align-items:center;justify-content:center;margin:0 12%}
-.stand-in{position:absolute;bottom:8px;left:10px;font-family:ui-monospace,monospace;font-size:10px;color:#5d6062;letter-spacing:.05em}
-/ ─────────────────────────────────────────────────────── */
-
-
-.plate-frame{padding:0 0 4px}
-@media(min-width:680px){ .plate-frame{max-width:520px;margin:34px auto 0} }
+@media(min-width:680px){ .plate{max-width:520px;margin-top:34px} }
 
 
 .lede{padding:34px 0 8px;font-size:21px;color:var(–bone);max-width:40ch}
@@ -105,34 +82,45 @@ footer a:hover{border-color:var(–red)}
 
 
 </head>
-<body><div class="plate-frame">
-  <div class="plate">
-    <div class="bars"><span>D</span><span>E</span><span>F</span><span>I</span><span>A</span><span>N</span><span>T</span></div>
-    <div class="sublabel">FRAMEWORKS LAB</div>
-    <div class="cruiser"></div>
-    <div class="stand-in">hero.jpg — 4:5 — swap me</div>
-  </div>
-</div><div class="wrap"><p class="lede">A physics-shaped model of human regulatory state, built by one person in Bend, Oregon. <span>Still being built. This page is the receipts.</span></p><section>
+<body>
+
+
+<img class="plate" src="hero.jpg" alt="DEFIANT FRAMEWORKS LAB"><div class="wrap">
+
+
+<p class="lede">A physics-shaped model of human regulatory state, built by one person in Bend, Oregon. <span>Still being built. This page is the receipts.</span></p>
+
+
+<section>
     <h2>Running</h2>
     <div class="run">
       <a href="/prism/"><span class="nm">PRISM</span><span class="dsc">Deterministic model of regulatory state</span><span class="st on">LIVE</span></a>
       <a href="/tori/"><span class="nm">TORI</span><span class="dsc">Companion on the PRISM kernel</span><span class="st on">BUILDING</span></a>
       <a href="/oura/"><span class="nm">OURA</span><span class="dsc">Physiological intake — scoped, not started</span><span class="st">PARKED</span></a>
     </div>
-  </section><section>
+  </section>
+
+
+<section>
     <h2>Ship Log</h2>
     <ul class="log">
       <li><time>07.22</time><p>New front page. Took myself less seriously. Net gain.</p></li>
       <li><time>07.14</time><p>Edge definition standard locked. Blind authoring holds.</p></li>
       <li><time>06.30</time><p>Glossary v4.0.0 governance rules in place.</p></li>
     </ul>
-  </section><footer>
+  </section>
+
+
+<footer>
     Defiant Frameworks Lab, LLC
     <span class="rule">/</span>
     Bend, OR
     <span class="rule">/</span>
     <a href="mailto:you@defiantframeworks.org">email</a>
-  </footer></div>
+  </footer>
+
+
+</div>
 </body>
 </html>
 </artifact>
