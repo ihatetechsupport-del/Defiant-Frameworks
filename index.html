@@ -1,54 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Defiant Frameworks Lab</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
-body{
-  min-height:100vh;
-  background:#2b2e30 url("hero.jpeg") center center / cover no-repeat;
-  color:#fff;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-end;
-  text-align:center;
-  padding:56px 28px 64px;
-  -webkit-font-smoothing:antialiased;
-}
-/* dark scrim so white text stays readable over the photo */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:linear-gradient(180deg,rgba(20,22,24,0) 40%,rgba(20,22,24,.72) 100%);
-  z-index:0;
-}
-.note,.sig{position:relative;z-index:1;font-family:"Caveat",cursive;color:#fff}
-.note{
-  max-width:20ch;
-  font-size:clamp(30px,7vw,44px);
-  line-height:1.25;
-  font-weight:600;
-  text-shadow:0 2px 12px rgba(0,0,0,.55);
-}
-.sig{
-  margin-top:16px;
-  font-size:clamp(24px,5.5vw,32px);
-  font-weight:500;
-  opacity:.92;
-  text-shadow:0 2px 12px rgba(0,0,0,.55);
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Defiant Frameworks Lab</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      background:
+        #2b2e30
+        url("./hero.jpeg")
+        center center / cover
+        no-repeat;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      text-align: center;
+      padding: 56px 28px 64px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(20, 22, 24, 0) 40%,
+        rgba(20, 22, 24, 0.72) 100%
+      );
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .note,
+    .sig {
+      position: relative;
+      z-index: 1;
+      font-family: "Caveat", cursive;
+      color: #fff;
+    }
+
+    .note {
+      max-width: 20ch;
+      font-size: clamp(30px, 7vw, 44px);
+      line-height: 1.25;
+      font-weight: 600;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+    }
+
+    .sig {
+      margin-top: 16px;
+      font-size: clamp(24px, 5.5vw, 32px);
+      font-weight: 500;
+      opacity: 0.92;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+    }
+  </style>
 </head>
+
 <body>
-  <p class="note">Building something that's gonna knock your socks off. Hang tight. It's gonna be rad.</p>
-  <p class="sig">— Noah</p>
+  <p class="note">
+    Building something that's gonna knock your socks off. Hang tight. It's gonna be rad.
+  </p>
+
+  <p class="sig">— Noah</p>
 </body>
 </html>
